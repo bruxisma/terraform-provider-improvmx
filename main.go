@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/hashicorp/terraform-plugin-sdk/plugin"
-	"github.com/ixm-one/terraform-provider-improvmx/improvmx"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/plugin"
+	"occult.work/terraform-provider-improvmx/improvmx"
 )
 
 func main() {
