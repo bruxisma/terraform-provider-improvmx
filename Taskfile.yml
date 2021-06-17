@@ -1,0 +1,9 @@
+version: 3
+tasks:
+  default:
+    - task: vet
+    - task: build
+  build: go build -v ./...
+  test: go test ./improvmx
+  docs: go generate
+  vet: go vet ./...
