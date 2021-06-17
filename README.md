@@ -1,6 +1,6 @@
 # Terraform Provider for ImprovMX
 
-[![Tests][test-badge][test-link]] [![codecov][codecov-badge]][codecov-link]
+[![Tests][test-badge]][test-link] [![codecov][coverage-badge]][coverage-link]
 
 This terraform provider allows you to interact with the [ImprovMX][1] REST API.
 
