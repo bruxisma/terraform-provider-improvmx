@@ -71,7 +71,7 @@ func resourceImprovMXDomainCreate(ctx context.Context, data *schema.ResourceData
 		return diag.Errorf("ImprovMX: Error creating domain '%s': %s", name, error)
 	}
 
-	resourceDomainSetFields(data, domain)
+	domainSetFields(data, domain)
 	return nil
 }
 
@@ -83,7 +83,7 @@ func resourceImprovMXDomainRead(ctx context.Context, data *schema.ResourceData, 
 	if error != nil {
 		return diag.Errorf("ImprovMX: Error reading domain '%s': %s", name, error)
 	}
-	resourceDomainSetFields(data, domain)
+	domainSetFields(data, domain)
 	return nil
 }
 
@@ -100,7 +100,7 @@ func resourceImprovMXDomainUpdate(ctx context.Context, data *schema.ResourceData
 	if error != nil {
 		return diag.Errorf("ImprovMX: Error updating domain '%s': %s", name, error)
 	}
-	resourceDomainSetFields(data, domain)
+	domainSetFields(data, domain)
 	return nil
 }
 
@@ -120,16 +120,4 @@ func resourceImprovMXDomainImport(ctx context.Context, data *schema.ResourceData
 		return nil, errors.New(fmt.Sprintf("ImprovMX: An error occurred while import '%s': %v", name, diagnostics))
 	}
 	return []*schema.ResourceData{data}, nil
-}
-
-func resourceDomainSetFields(data *schema.ResourceData, domain *improvmx.Domain) {
-	data.SetId(domain.Name)
-	data.Set("active", domain.Active)
-	data.Set("added", domain.Added.Unix())
-	//data.Set("aliases", domain.Aliases)
-	data.Set("name", domain.Name)
-	data.Set("display", domain.Display)
-	data.Set("dkim_selector", domain.DKIMSelector)
-	data.Set("notification_email", domain.NotificationEmail)
-	data.Set("whitelabel", domain.Whitelabel)
 }

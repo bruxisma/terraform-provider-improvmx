@@ -34,14 +34,12 @@ func Provider() *schema.Provider {
 		},
 
 		DataSourcesMap: map[string]*schema.Resource{
-			"improvmx_account": dataSourceImprovMXAccount(),
-			"improvmx_alias":   dataSourceImprovMXAlias(),
-			//"improvmx_domain": dataSourceImprovMXDomain(),
+			"improvmx_account":     dataSourceImprovMXAccount(),
 			"improvmx_whitelabels": dataSourceImprovMXWhitelabels(),
+			"improvmx_domains":     dataSourceImprovMXDomains(),
 			"improvmx_aliases":     dataSourceImprovMXAliases(),
-			//"improvmx_domains":     dataSourceImprovMXDomains(),
-			//"improvmx_alias_logs":  dataSourceImprovMXAliasLogs(),
-			//"improvmx_domain_logs": dataSourceImprovMXDomainLogs(),
+			"improvmx_domain":      dataSourceImprovMXDomain(),
+			"improvmx_alias":       dataSourceImprovMXAlias(),
 		},
 	}
 	provider.ConfigureContextFunc = func(ctx context.Context, data *schema.ResourceData) (interface{}, diag.Diagnostics) {
