@@ -1,26 +1,38 @@
 name: Tests
-on:
-  pull_request:
-    paths-ignore:
-      - '**.md'
+on: 
   push:
     paths-ignore:
       - '**.md'
+  pull_request:
+    types: [synchronize, opened, edited]
+    paths-ignore:
+      - '**.md'
 jobs:
+  skip:
+    name: Check Duplicate Actions
+    runs-on: ubuntu-latest
+    outputs:
+      should-skip: ${{steps.skip-check.outputs.should_skip}}
+    steps:
+      - name: Skip Duplicate Actions (Build and Test)
+        uses: fkirc/skip-duplicate-actions@v3
+        id: skip-check
   build:
     name: Build
     runs-on: ${{ matrix.os }}
+    needs: skip
     strategy:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
+    if: needs.skip.output.should-skip != 'true'
     steps:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Setup Go
         uses: actions/setup-go@v2
         with:
-          go-version: 1.16
+          go-version: 1.17
       - name: Find Module Cache Directory
         run: echo "::set-output name=dir::$(go env GOMODCACHE)"
         id: go-mod-cache
@@ -37,27 +49,38 @@ jobs:
   test:
     name: Test
     runs-on: ${{ matrix.os }}
+    needs: skip
     strategy:
       fail-fast: false
       matrix:
         terraform: ['1.0.0', '1.0.1']
         os: [ubuntu-latest, windows-latest, macos-latest]
+    if: needs.skip.output.should-skip != 'true'
     steps:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Setup Go
         uses: actions/setup-go@v2
         with:
-          go-version: 1.16
-      - name: Find Module Cache Directory
+          go-version: 1.17
+      - name: Get Go Modules Cache Location
         run: echo "::set-output name=dir::$(go env GOMODCACHE)"
-        id: go-mod-cache
+        id: go-modules-cache
+      - name: Get Go Build Cache Location
+        run: echo "::set-output name=dir::$(go env GOCACHE)"
+        id: go-build-cache
       - name: Restore Module Cache
         uses: actions/cache@v2
         with:
           restore-keys: ${{ runner.os }}-go-
-          path: ${{ steps.go-mod-cache.outputs.dir }}
-          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+          path: ${{ steps.go-modules-cache.outputs.dir }}
+          key: ${{ runner.os }}-go-modules-${{ hashFiles('**/go.sum') }}
+      - name: Restore Build Cache
+        uses: actions/cache@v2
+        with:
+          restore-keys: ${{ runner.os }}-go-build-
+          path: ${{ steps.go-build-cache.outputs.dir }}
+          key: ${{ runner.os}}-go-build-${{ hashFiles('**/go.mod', '**/go.sum') }}
       - name: Update Dependencies
         run: go mod download
       - name: Terraform Acceptance Tests
@@ -76,4 +99,3 @@ jobs:
           fail_ci_if_error: true
           directory: ${{ github.workspace }}
           files: coverage.out
-          dry_run: true

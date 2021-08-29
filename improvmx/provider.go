@@ -45,7 +45,7 @@ func Provider() *schema.Provider {
 	provider.ConfigureContextFunc = func(ctx context.Context, data *schema.ResourceData) (interface{}, diag.Diagnostics) {
 		session, error := improvmx.New(
 			data.Get("token").(string),
-			improvmx.WithHostURL(data.Get("base_url").(string)),
+			improvmx.WithBaseURL(data.Get("base_url").(string)),
 			improvmx.WithUserAgent(fmt.Sprintf("terraform-provider-improvmx/%s", provider.TerraformVersion)))
 		if error != nil {
 			return nil, diag.FromErr(error)
