@@ -53,7 +53,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        terraform: ['1.0.0', '1.0.1']
+        terraform: ['1.0.5']
         os: [ubuntu-latest, windows-latest, macos-latest]
     if: needs.skip.output.should-skip != 'true'
     steps:
@@ -63,6 +63,10 @@ jobs:
         uses: actions/setup-go@v2
         with:
           go-version: 1.17
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform
+        with:
+          terraform_version: ${{ matrix.terraform }}
       - name: Get Go Modules Cache Location
         run: echo "::set-output name=dir::$(go env GOMODCACHE)"
         id: go-modules-cache
@@ -91,7 +95,6 @@ jobs:
           -covermode=atomic
           -cover ${{github.workspace}}/improvmx
         env:
-          TF_ACC_TERRAFORM_VERSION: ${{ matrix.terraform }}
           TF_ACC: 1
       - name: Upload Code Coverage
         uses: codecov/codecov-action@v2.0.3
