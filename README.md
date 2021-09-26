@@ -11,7 +11,7 @@ This terraform provider allows you to interact with the [ImprovMX][1] REST API.
 
 [1]: https://improvmx.com
 
-[coverage-badge]: https://codecov.io/gh/slurps-mad-rips/terraform-provider-improvmx/branch/main/graph/badge.svg?token=DWOcB8YHRu
-[coverage-link]: https://codecov.io/gh/slurps-mad-rips/terraform-provider-improvmx
-[test-badge]: https://github.com/slurps-mad-rips/terraform-provider-improvmx/actions/workflows/test.yml/badge.svg
-[test-link]: https://github.com/slurps-mad-rips/terraform-provider-improvmx/actions/workflows/test.yml
+[coverage-badge]: https://codecov.io/gh/bruxisma/terraform-provider-improvmx/branch/main/graph/badge.svg?token=DWOcB8YHRu
+[coverage-link]: https://codecov.io/gh/bruxisma/terraform-provider-improvmx
+[test-badge]: https://github.com/bruxisma/terraform-provider-improvmx/actions/workflows/test.yml/badge.svg
+[test-link]: https://github.com/bruxisma/terraform-provider-improvmx/actions/workflows/test.yml
