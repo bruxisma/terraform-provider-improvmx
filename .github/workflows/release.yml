@@ -20,7 +20,7 @@ jobs:
           PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
         id: gpg
       - name: Run GoReleaser
-        uses: goreleaser/goreleaser-action@v2
+        uses: goreleaser/goreleaser-action@b953231f81b8dfd023c58e0854a721e35037f28b # tag=v2
         with:
           version: latest
           args: >-
