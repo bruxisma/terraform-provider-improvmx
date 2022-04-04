@@ -64,7 +64,7 @@ jobs:
         with:
           go-version: 1.17
       - name: Setup Terraform
-        uses: hashicorp/setup-terraform@3d8debd658c92063839bc97da5c2427100420dec # tag=v1
+        uses: hashicorp/setup-terraform@ed3a0531877aca392eb870f440d9ae7aba83a6bd # tag=v1
         with:
           terraform_version: ${{ matrix.terraform }}
       - name: Get Go Modules Cache Location
