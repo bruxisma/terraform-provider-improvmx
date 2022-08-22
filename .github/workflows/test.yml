@@ -37,7 +37,7 @@ jobs:
         run: echo "::set-output name=dir::$(go env GOMODCACHE)"
         id: go-mod-cache
       - name: Restore Module Cache
-        uses: actions/cache@a7c34adf76222e77931dedbf4a45b2e4648ced19 # tag=v3
+        uses: actions/cache@fd5de65bc895cf536527842281bea11763fefd77 # tag=v3
         with:
           restore-keys: ${{ runner.os }}-go-
           key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
@@ -74,13 +74,13 @@ jobs:
         run: echo "::set-output name=dir::$(go env GOCACHE)"
         id: go-build-cache
       - name: Restore Module Cache
-        uses: actions/cache@a7c34adf76222e77931dedbf4a45b2e4648ced19 # tag=v3
+        uses: actions/cache@fd5de65bc895cf536527842281bea11763fefd77 # tag=v3
         with:
           restore-keys: ${{ runner.os }}-go-
           path: ${{ steps.go-modules-cache.outputs.dir }}
           key: ${{ runner.os }}-go-modules-${{ hashFiles('**/go.sum') }}
       - name: Restore Build Cache
-        uses: actions/cache@a7c34adf76222e77931dedbf4a45b2e4648ced19 # tag=v3
+        uses: actions/cache@fd5de65bc895cf536527842281bea11763fefd77 # tag=v3
         with:
           restore-keys: ${{ runner.os }}-go-build-
           path: ${{ steps.go-build-cache.outputs.dir }}
