@@ -1,6 +1,6 @@
 module occult.work/terraform-provider-improvmx
 
-go 1.16
+go 1.19
 
 require (
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.20.0
