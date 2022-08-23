@@ -31,6 +31,8 @@ jobs:
         uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # tag=v3
       - name: Setup Go
         uses: actions/setup-go@268d8c0ca0432bb2cf416faae41297df9d262d7f # tag=v3
+        with:
+          go-version: 1.x
       - name: Find Module Cache Directory
         run: echo "::set-output name=dir::$(go env GOMODCACHE)"
         id: go-mod-cache
@@ -59,6 +61,8 @@ jobs:
         uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # tag=v3
       - name: Setup Go
         uses: actions/setup-go@268d8c0ca0432bb2cf416faae41297df9d262d7f # tag=v3
+        with:
+          go-version: 1.x
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@17d4c9b8043b238f6f35641cdd8433da1e6f3867 # tag=v2
         with:
