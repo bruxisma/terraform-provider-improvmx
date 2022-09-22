@@ -15,7 +15,7 @@ jobs:
       should-skip: ${{steps.skip-check.outputs.should_skip}}
     steps:
       - name: Skip Duplicate Actions (Build and Test)
-        uses: fkirc/skip-duplicate-actions@9d116fa7e55f295019cfab7e3ab72b478bcf7fdd # tag=v4
+        uses: fkirc/skip-duplicate-actions@16e45251db543220bcfe77e2e4d30c9196001b36 # tag=v5
         id: skip-check
   build:
     name: Build
